@@ -44,7 +44,6 @@ Formazione_online_Java_Full_Stack
 ├── exercises/
 ├── projects/
 ├── notes/
-├── resources/
 └── README.md
 ```
 
