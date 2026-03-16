@@ -1,0 +1,48 @@
+		JAVA COME LINGUAGGIO A OGGETTI
+		------------------------------
+
+Java è organizzato in classi che possono essere riutilizzate e migliorano la manutenibilità del codice.
+
+-> Permette la divisione dei task
+-> Permette di scomporre un problema complesso in parti più piccole
+
+In una classe ci sono:
+-> i campi (stato interno dell'oggetto)
+-> i metodi (azioni che un oggetto può eseguire)
+
+-> La parola chiave "this" è usata per specificare il campo dell'oggetto corrente.
+
+-> Un oggetto è la materializzazione (istanza) di una classe.
+
+-> Ogni oggetto creato occupa spazio in memoria ed è indipendente dagli altri oggetti.
+
+-> Il processo di creare un oggetto si chiama instanziazione.
+   Esempio:
+   Scanner sc = new Scanner(System.in);
+
+-> Il costruttore è il punto di partenza di un oggetto.
+   Viene chiamato automaticamente quando l'oggetto viene creato
+   e serve per inizializzare i campi.
+
+-> Incapsulamento:
+   Un oggetto incapsulato è come una "scatola nera".
+   Protegge i dati interni da manipolazioni esterne.
+
+Per usare l'incapsulamento si usano i modificatori di accesso:
+
+public
+-> accessibile da qualsiasi parte del codice
+
+private
+-> accessibile solo all'interno della stessa classe
+
+protected
+-> accessibile nella stessa classe e nelle classi dello stesso package
+
+default (senza specificatore)
+-> accessibile solo nello stesso package
+
+-> I campi di una classe dovrebbero essere sempre "private".
+   Di conseguenza si accede ad essi tramite metodi:
+   - getter (per leggere il valore)
+   - setter (per modificarlo)
