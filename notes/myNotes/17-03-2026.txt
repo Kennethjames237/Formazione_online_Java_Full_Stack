@@ -1,0 +1,131 @@
+		LAVORARE CON PIU CLASSI IN JAVA (EREDITARIETA)
+		==============================================
+
+			GERARCHIA DELLE CLASSI
+			----------------------
+-> Una sottoclasse dipende da una superclasse
+-> Relazione: "is-a" (è un)
+  Esempio: Cane è un Animale
+
+			CLASSE BASE E SOTTOCLASSE
+			-------------------------
+-> Classe base (superclasse): contiene metodi e attributi comuni
+-> Classe derivata (sottoclasse): eredita dalla superclasse
+
+Esempio:
+
+class Animale {
+    void mangia() {
+        System.out.println("Sto mangiando");
+    }
+}
+
+class Cane extends Animale {
+    void abbaia() {
+        System.out.println("Bau bau!");
+    }
+}
+
+			ESTENSIONE (extends)
+			--------------------
+-> Si usa "extends" per ereditare
+
+class Cane extends Animale
+
+			METODI DELLA SUPERCLASSE
+			------------------------
+-> La sottoclasse NON deve sempre implementare tutti i metodi
+-> SOLO se la classe è abstract
+
+			OVERRIDE (SOVRASCRITTURA)
+			-------------------------
+-> La sottoclasse può modificare un metodo della superclasse
+
+class Cane extends Animale {
+    @Override
+    void mangia() {
+        super.mangia();
+        System.out.println("Il cane mangia crocchette");
+    }
+}
+
+		--------------------------------------------------
+				  POLIMORFISMO
+		--------------------------------------------------
+
+-> "Molte forme"
+-> Un riferimento può puntare a oggetti diversi
+
+Esempio:
+
+Animale a = new Cane();
+a.mangia();   // usa il metodo di Cane
+
+Altro esempio:
+
+class Gatto extends Animale {
+    @Override
+    void mangia() {
+        System.out.println("Il gatto mangia pesce");
+    }
+}
+
+Animale a1 = new Cane();
+Animale a2 = new Gatto();
+
+a1.mangia();   // Cane
+a2.mangia();   // Gatto
+
+--------------------------------------------------
+ASTRAZIONE
+--------------------------------------------------
+
+- Nasconde i dettagli
+- Si usa con:
+  * abstract class
+  * interface
+
+CLASSE ASTRATTA
+---------------
+
+abstract class Animale {
+    abstract void verso();
+
+    void dormi() {
+        System.out.println("Sto dormendo");
+    }
+}
+
+- NON si può istanziare:
+  // Animale a = new Animale();  -> ERRORE
+
+SOTTOCLASSE
+-----------
+
+class Cane extends Animale {
+    void verso() {
+        System.out.println("Bau");
+    }
+}
+
+INTERFACCIA
+-----------
+
+interface Volante {
+    void vola();
+}
+
+class Uccello implements Volante {
+    public void vola() {
+        System.out.println("Sto volando");
+    }
+}
+
+--------------------------------------------------
+RIASSUNTO
+--------------------------------------------------
+
+- Ereditarietà -> extends (riuso codice)
+- Polimorfismo -> stesso metodo, comportamento diverso
+- Astrazione   -> nasconde dettagli (abstract, interface)
+
