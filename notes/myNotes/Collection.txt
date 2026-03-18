@@ -1,0 +1,234 @@
+Java Collections - Advanced Notes
+=================================
+
+
+1. Arrays.asList()
+------------------
+Arrays.asList() converts an array into a fixed-size List.
+
+Example:
+List<Integer> l = Arrays.asList(1, 2, 3, 4);
+
+Important:
+- The list is NOT fully dynamic
+- You cannot add or remove elements
+
+l.add(5);    // ERROR
+l.remove(1); // ERROR
+
+But you CAN modify elements:
+l.set(0, 10); // OK
+
+Explanation:
+- It is backed by the original array
+- Size is fixed
+
+
+2. new ArrayList<>(Arrays.asList(...))
+--------------------------------------
+This creates a REAL dynamic list from a fixed list.
+
+Example:
+List<Integer> l = new ArrayList<>(Arrays.asList(1, 2, 3));
+
+Now you can:
+l.add(4);    // OK
+l.remove(1); // OK
+
+Explanation:
+- Copies elements into a new ArrayList
+- This is the correct way to make it dynamic
+
+
+3. List.of()
+------------
+Creates an immutable list (Java 9+)
+
+Example:
+List<Integer> l = List.of(1, 2, 3, 4);
+
+Important:
+- Cannot modify at all
+
+l.add(5);    // ERROR
+l.remove(1); // ERROR
+l.set(0, 10);// ERROR
+
+Use case:
+- When you need a constant list
+
+
+4. Collections.singletonList()
+------------------------------
+Creates a list with ONLY ONE element (immutable)
+
+Example:
+List<String> l = Collections.singletonList("Hello");
+
+Important:
+- Size = 1
+- Cannot add/remove/modify
+
+
+5. Arrays.stream(...).toList()
+------------------------------
+Used to convert an array into a List using streams.
+
+Example:
+String[] nomi = {"Ali", "Luca", "Marco"};
+
+List<String> l = Arrays.stream(nomi).toList();
+
+Important:
+- Result is IMMUTABLE (Java 16+)
+- Cannot modify
+
+
+6. Double Brace Initialization (NOT recommended)
+------------------------------------------------
+Example:
+List<Integer> l = new ArrayList<>() {{
+    add(1);
+    add(2);
+    add(3);
+}};
+
+Explanation:
+- Creates anonymous inner class
+- Works, but NOT recommended
+
+Problems:
+- Memory overhead
+- Harder to read
+- Avoid in exams and real code
+
+
+7. Copying a List
+-----------------
+You can create a new list from another list.
+
+Example:
+List<Integer> l1 = new ArrayList<>(l2);
+
+Explanation:
+- Creates a new independent list
+- If l2 was fixed/immutable, l1 becomes dynamic
+
+
+8. Collections.emptyList()
+--------------------------
+Creates an empty immutable list.
+
+Example:
+List<String> l = Collections.emptyList();
+
+Important:
+- Cannot add elements
+
+
+=================================
+SET
+=================================
+
+Set = unordered collection, no duplicates
+
+Example:
+Set<Integer> s1 = new HashSet<>();
+s1.add(1);
+s1.add(2);
+s1.add(1); // duplicate ignored
+
+Important:
+- No duplicates allowed
+
+Fast check:
+s1.contains(1); // true
+
+
+Common ways to create sets:
+---------------------------
+
+1. Set.of()
+Set<Integer> s = Set.of(1, 2, 3, 4);
+- Immutable
+
+2. From list:
+Set<Integer> s = new HashSet<>(Arrays.asList(1,2,3,4,3,2));
+- Removes duplicates automatically
+
+3. TreeSet (sorted):
+Set<Integer> s = new TreeSet<>(Arrays.asList(3,2,5,4));
+- Automatically sorted
+
+4. LinkedHashSet:
+Set<Integer> s = new LinkedHashSet<>();
+- Keeps insertion order
+
+
+=================================
+MAP
+=================================
+
+Map stores key-value pairs
+
+1. HashMap
+----------
+Example:
+Map<Integer, String> map1 = new HashMap<>();
+map1.put(1, "uno");
+map1.put(2, "two");
+
+Important:
+- Keys are unique
+- Fast access
+
+
+2. Map.ofEntries()
+------------------
+Creates immutable map
+
+Example:
+Map<Integer, String> map = Map.ofEntries(
+    Map.entry(1, "uno"),
+    Map.entry(2, "two")
+);
+
+Important:
+- Cannot modify
+
+
+3. Double brace (NOT recommended)
+---------------------------------
+Map<String, Integer> map = new HashMap<>() {{
+    put("Pasta", 233);
+}};
+
+
+4. TreeMap
+----------
+Example:
+Map<Integer, String> map = new TreeMap<>();
+
+Explanation:
+- Sorted by keys automatically
+
+
+=================================
+SUMMARY
+=================================
+
+Arrays.asList()        -> fixed size list
+new ArrayList<>(...)   -> dynamic list
+List.of()              -> immutable list
+singletonList()        -> one element immutable
+emptyList()            -> empty immutable
+
+Set                    -> no duplicates
+HashSet                -> fast, no order
+TreeSet                -> sorted
+LinkedHashSet          -> keeps order
+
+Map                    -> key-value
+HashMap                -> fast
+TreeMap                -> sorted keys
+Map.ofEntries()        -> immutable

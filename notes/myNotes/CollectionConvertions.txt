@@ -1,0 +1,116 @@
+=================================
+COLLECTION CONVERSIONS (IMPORTANT)
+=================================
+
+1. Array -> List
+----------------
+String[] arr = {"A", "B", "C"};
+
+List<String> list = Arrays.asList(arr);
+- Fixed size (cannot add/remove)
+
+Dynamic version:
+List<String> list = new ArrayList<>(Arrays.asList(arr));
+
+
+2. List -> Array
+----------------
+List<String> list = List.of("A", "B", "C");
+
+String[] arr = list.toArray(new String[0]);
+
+Explanation:
+- Converts List into array
+- new String[0] is standard practice
+
+
+3. List -> Set
+--------------
+List<Integer> list = Arrays.asList(1,2,2,3,4);
+
+Set<Integer> set = new HashSet<>(list);
+
+Result:
+- Duplicates removed automatically
+
+
+4. Set -> List
+--------------
+Set<Integer> set = Set.of(1,2,3,4);
+
+List<Integer> list = new ArrayList<>(set);
+
+Explanation:
+- Converts set into list
+- Order depends on Set type
+
+
+5. Array -> Set
+---------------
+Integer[] arr = {1,2,2,3};
+
+Set<Integer> set = new HashSet<>(Arrays.asList(arr));
+
+Result:
+- Duplicates removed
+
+
+6. Set -> Array
+---------------
+Set<Integer> set = Set.of(1,2,3);
+
+Integer[] arr = set.toArray(new Integer[0]);
+
+
+7. Map -> Set (keys / values / entries)
+---------------------------------------
+
+Map<Integer, String> map = new HashMap<>();
+map.put(1, "A");
+map.put(2, "B");
+
+Keys:
+Set<Integer> keys = map.keySet();
+
+Values:
+Collection<String> values = map.values();
+
+Entries:
+Set<Map.Entry<Integer, String>> entries = map.entrySet();
+
+
+8. Map -> List
+--------------
+List<Integer> keysList = new ArrayList<>(map.keySet());
+List<String> valuesList = new ArrayList<>(map.values());
+
+
+9. Stream conversions (modern Java)
+----------------------------------
+
+Array -> List:
+List<String> list = Arrays.stream(arr).toList(); // immutable
+
+List -> List:
+List<Integer> newList = list.stream().toList(); // immutable copy
+
+List -> Set:
+Set<Integer> set = list.stream().collect(Collectors.toSet());
+
+
+=================================
+QUICK SUMMARY (VERY IMPORTANT)
+=================================
+
+Array -> List     : Arrays.asList(arr)
+Array -> List dyn : new ArrayList<>(Arrays.asList(arr))
+
+List -> Array     : list.toArray(new Type[0])
+
+List -> Set       : new HashSet<>(list)
+Set -> List       : new ArrayList<>(set)
+
+Map -> Keys       : map.keySet()
+Map -> Values     : map.values()
+
+Stream -> List    : stream().toList() (immutable)

@@ -1,0 +1,138 @@
+Java Collection Framework
+==============================
+
+1. What is the Collection Framework?
+-----------------------------------
+The Collection Framework in Java is a set of classes and interfaces used to store and manage groups of objects dynamically.
+
+- Located in the package: java.util
+- Provides ready-to-use data structures
+- Improves performance and code reuse
+
+
+2. List
+-------
+A List is an ordered and dynamic sequence of elements.
+
+Characteristics:
+- Maintains insertion order
+- Allows duplicates
+- Elements can be accessed by index
+- Dynamic size
+
+Implementations:
+- ArrayList
+- LinkedList
+
+Example:
+import java.util.*;
+
+List<String> list = new ArrayList<>();
+list.add("Alice");
+list.add("Bob");
+list.add("Alice"); // duplicates allowed
+
+System.out.println(list);        // [Alice, Bob, Alice]
+System.out.println(list.get(1)); // Bob
+
+Notes:
+- ArrayList uses a dynamic array → fast access
+- LinkedList uses nodes → faster insert/remove
+
+
+3. Set
+------
+A Set models the mathematical concept of a set.
+
+Characteristics:
+- Does not allow duplicates
+- No guaranteed order (depends on implementation)
+- Fast lookup
+
+Implementations:
+- HashSet
+- LinkedHashSet
+- TreeSet
+
+Example:
+import java.util.*;
+
+Set<String> set = new HashSet<>();
+set.add("Alice");
+set.add("Bob");
+set.add("Alice"); // ignored
+
+System.out.println(set);
+
+Notes:
+- HashSet uses a hash table
+- contains() is O(1) on average
+
+set.contains("Bob"); // true
+
+
+4. Generics
+-----------
+Generics allow you to specify the type of elements in a collection.
+
+Advantages:
+- Type safety
+- No casting needed
+- Cleaner code
+
+Example:
+ArrayList<String> list = new ArrayList<>();
+list.add("Hello");
+// list.add(10); // compile error
+
+Example with custom class:
+class Studente {
+    String nome;
+
+    Studente(String nome) {
+        this.nome = nome;
+    }
+}
+
+ArrayList<Studente> studenti = new ArrayList<>();
+studenti.add(new Studente("Mario"));
+
+
+5. Map
+------
+A Map stores key-value pairs.
+
+Characteristics:
+- Keys must be unique
+- Values can be duplicated
+- Not part of Collection interface (but part of framework)
+
+Example:
+import java.util.*;
+
+Map<Integer, String> map = new HashMap<>();
+map.put(1, "Alice");
+map.put(2, "Bob");
+
+System.out.println(map.get(1)); // Alice
+
+
+6. Common Operations
+-------------------
+Iteration:
+for(String s : list) {
+    System.out.println(s);
+}
+
+Size:
+list.size();
+
+Sorting:
+Collections.sort(list);
+
+
+7. Summary
+----------
+List -> ordered + allows duplicates
+Set  -> no duplicates
+Map  -> key-value pairs

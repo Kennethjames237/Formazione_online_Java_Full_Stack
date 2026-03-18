@@ -1,0 +1,244 @@
+Exceptions in Java
+==============================
+
+1. What are Exceptions?
+----------------------
+An exception is an event that occurs during program execution that disrupts the normal flow of the program.
+
+When a user inputs data, we are not sure it will be correct (wrong type, invalid value, etc.).
+So we use exceptions to handle these errors safely.
+
+
+2. Main Keywords
+----------------
+
+try:
+- Used to wrap code that might cause an exception
+
+catch:
+- Used to handle the exception
+
+throw:
+- Used to manually throw an exception
+
+throws:
+- Declares exceptions in method signature
+
+finally:
+- Block that always executes (whether exception occurs or not)
+
+
+3. Basic Example
+----------------
+import java.util.*;
+
+public class Example {
+    public static void main(String[] args) {
+        try {
+            int x = 10 / 0; // error: division by zero
+        } catch (ArithmeticException e) {
+            System.out.println("Error: division by zero");
+        } finally {
+            System.out.println("This always runs");
+        }
+    }
+}
+
+
+4. Example with User Input
+--------------------------
+import java.util.*;
+
+Scanner sc = new Scanner(System.in);
+
+try {
+    int number = sc.nextInt();
+    System.out.println("You entered: " + number);
+} catch (InputMismatchException e) {
+    System.out.println("Invalid input! Please enter a number.");
+}
+
+
+5. throw vs throws
+------------------
+
+throw:
+- Used inside method
+- Throws a specific exception
+
+Example:
+if (age < 18) {
+    throw new IllegalArgumentException("Age must be >= 18");
+}
+
+throws:
+- Used in method declaration
+- Indicates method may throw exceptions
+
+Example:
+public void readFile() throws IOException {
+    // code
+}
+
+
+6. Checked vs Unchecked Exceptions
+=================================
+
+Checked Exceptions:
+-------------------
+- Checked at compile time
+- Must be handled (try-catch) or declared (throws)
+
+Examples:
+- IOException
+- SQLException
+
+Example:
+import java.io.*;
+
+FileReader file = new FileReader("file.txt"); // must handle exception
+
+
+Unchecked Exceptions:
+---------------------
+- Occur at runtime
+- Not required to handle
+
+Examples:
+- ArithmeticException
+- NullPointerException
+- ArrayIndexOutOfBoundsException
+
+Example:
+int x = 10 / 0; // runtime error
+
+
+7. Exception Hierarchy (important)
+---------------------------------
+All exceptions derive from:
+
+- Object
+  -> Throwable
+     -> Exception (checked)
+     -> RuntimeException (unchecked)
+
+
+8. Multiple catch
+-----------------
+try {
+    int[] arr = new int[2];
+    arr[5] = 10;
+} catch (ArrayIndexOutOfBoundsException e) {
+    System.out.println("Index error");
+} catch (Exception e) {
+    System.out.println("General error");
+}
+
+
+9. Best Practices
+-----------------
+- Always handle exceptions properly
+- Do not use empty catch blocks
+- Catch specific exceptions instead of general Exception
+- Use finally to close resources (or use try-with-resources)
+
+
+10. Try-with-resources (IMPORTANT)
+---------------------------------
+Automatically closes resources
+
+Example:
+import java.util.*;
+import java.io.*;
+
+try (Scanner sc = new Scanner(System.in)) {
+    int x = sc.nextInt();
+}
+
+=======================================================================================================
+
+->Array.asList  # I need explanation ->this is like an static array so here we can not do e.g A1.add().
+->new ArrayList<>(Array.asList) -> # I need explanation here -> what os the use of this it convert the static array as a dynamic array?
+-> what about List<Interger> l = List.of(1,2,3,4);-> it is not modificable ?
+-> List<String> = Collections.singletonList("Hello"); -> i need also explanation here
+
+
+
+what but -> List<String> = Array.stream(nomi).toList();
+
+-> Also we can do List<Interger> = Arrayist<>() {{
+	add(1);
+	add(2);
+	add(3);
+}};
+
+-> we can create a list from another list(it can ne static to make it dynamic)
+-> List<Interger> l1 = new Array list<>(list12);
+
+
+-> what about Collection.emptyList();
+
+
+SET -> insieme non ordinatoi
+
+Set<Interger> s1 = new HashSet<>();
+s1.add(1)
+s1.add(2)
+s1.add(1) X problem
+
+Contol rapid -> s1.contains(1) = True
+	 we also have
+	 ->Set.of(1,2,3,4,);
+	 -> new HashSet<>(Array.asList(1,2,3,4,3,2)); -> as it will be a set it wil remounve automaticanly dupicate
+
+	 Set<String> set1 = new TreeSet<>(Array.asLIst(3,2,52,4) -> this will put it in order automatically
+	 new LinkedHashSet<>()-> it keeps the order in which i inseerted data
+
+
+MAP
+====
+
+ -> Map<Key, Value> map1 = new HashMap<>();
+	map1.put(1,"uno");
+	map2.put(2,"Two");
+
+
+ ->  Map<Interger,String > new Map.ofEntries(
+ 				Map.entry(1,"uno"),
+				Map.entry(2,"Two")
+				);
+
+ ->   new HashMap<>(){{
+ put(Pasta,233)
+
+ 	}}
+
+	Map<>  = treeMap()<>;
+
+	= 
+
+	SCREENSHORT<Look!!!>
+
+
+
+=======================================================================================================
+
+
+try {
+	// where a problem can occore
+
+    }
+catch(FileNotFoundException e){
+       // print some message here
+       
+     }
+finally{
+	// here with or without error it is always executed .
+
+       }
+
+
+
+
+
+
