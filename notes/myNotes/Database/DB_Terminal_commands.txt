@@ -1,0 +1,89 @@
+MYSQL / MariaDB TERMINAL CHEATSHEET
+==================================
+
+1. Open Terminal & Go to MySQL folder
+-------------------------------------
+cd /Applications/XAMPP/xamppfiles/bin
+
+2. Connect to MySQL
+-------------------
+# If root has no password
+./mysql -u root
+
+# If root has password
+./mysql -u root -p
+# Enter password when prompted
+
+3. Show all databases
+---------------------
+SHOW DATABASES;
+
+4. Create a new database
+------------------------
+CREATE DATABASE mydb;
+
+5. Connect to a database
+------------------------
+USE mydb;
+# Output: Database changed
+
+6. Show tables in the database
+-------------------------------
+SHOW TABLES;
+
+7. Create a new table
+---------------------
+CREATE TABLE users (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    age INT DEFAULT 18,
+    email VARCHAR(150) UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+# Notes:
+# - id is primary key, auto-incremented
+# - name cannot be NULL
+# - age defaults to 18 if not provided
+# - email must be unique
+# - created_at auto-fills with current date/time
+
+8. Insert data into table
+-------------------------
+INSERT INTO users (name, age, email) VALUES ('Luca', 25, 'luca@example.com');
+INSERT INTO users (name, email) VALUES ('Anna', 'anna@example.com');
+# age will default to 18
+
+9. View data in table
+---------------------
+SELECT * FROM users;
+
+10. Update data
+---------------
+UPDATE users SET age = 26 WHERE name = 'Luca';
+
+11. Delete data
+---------------
+DELETE FROM users WHERE name = 'Anna';
+
+12. Drop table (delete table)
+-----------------------------
+DROP TABLE users;
+
+13. Drop database
+-----------------
+DROP DATABASE mydb;
+
+14. Exit MySQL
+--------------
+exit;
+
+15. Tips
+--------
+- Always end commands with a semicolon (;)
+- Commands are not case-sensitive
+- Use SHOW TABLES and DESCRIBE table_name to check structure
+- To view only certain columns:
+  SELECT name, email FROM users;
+- To filter rows:
+  SELECT * FROM users WHERE age > 20;

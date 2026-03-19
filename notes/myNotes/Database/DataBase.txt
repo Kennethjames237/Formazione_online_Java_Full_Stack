@@ -1,0 +1,183 @@
+DATABASE --> Relational Database
+================================
+
+What is a Database
+------------------
+- A database is a system used to store and organize data.
+- It provides:
+  - Persistence (data remains saved over time)
+  - Durability (data is not lost after crashes)
+  - Multi-user access (many users can read/write data at the same time)
+
+Structure of a Relational Database
+---------------------------------
+- Data is organized into tables.
+
+Table:
+- A table represents a collection of related data (e.g., Users, Orders)
+- It is composed of:
+  - Columns (attributes) -> describe properties (name, age, etc.)
+  - Rows (records / tuples) -> represent individual entities
+
+Example:
+ID | Name | Age
+----------------
+1  | Luca | 25
+2  | Anna | 30
+
+Keys
+----
+
+Primary Key:
+- Uniquely identifies each row in a table
+- Must be unique
+- Cannot be NULL
+
+Foreign Key:
+- Used to create relationships between tables
+- References the primary key of another table
+
+Relationships
+-------------
+- One-to-One (1:1)
+- One-to-Many (1:N)
+  Example: one user -> many orders
+- Many-to-Many (N:M)
+  Requires a junction (bridge) table
+
+CRUD Operations
+---------------
+- Create  -> INSERT
+- Read    -> SELECT
+- Update  -> UPDATE
+- Delete  -> DELETE
+
+SQL --> Structured Query Language
+================================
+
+- SQL is the language used to interact with relational databases.
+
+SQL Categories
+--------------
+
+1) DDL (Data Definition Language)
+--------------------------------
+- Used to define and modify the database structure (schema)
+
+Main command:
+- CREATE TABLE -> creates a new table
+
+Example:
+CREATE TABLE Users (
+    id BIGINT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    age INT,
+    created_at DATE
+);
+
+Data Types
+----------
+- BIGINT / INT -> integer numbers
+- DECIMAL / NUMERIC -> decimal values (e.g., money)
+- VARCHAR(n) -> variable-length string
+- CHAR(n) -> fixed-length string
+- DATE -> date values
+- TIME -> time values
+- TIMESTAMP -> date and time together
+- BOOLEAN -> true/false
+
+Constraints
+-----------
+- Rules that each table must respect
+
+Common constraints:
+
+- NOT NULL
+  -> A column cannot have NULL values
+
+- UNIQUE
+  -> No duplicate values allowed
+
+- PRIMARY KEY
+  -> Unique identifier for each row
+
+- FOREIGN KEY
+  -> Creates relationship between two tables
+
+Example:
+FOREIGN KEY (user_id) REFERENCES Users(id)
+
+- DEFAULT
+  -> Sets a default value if none is provided
+
+Example:
+age INT DEFAULT 18
+
+Schema
+------
+- The schema defines the structure of the database
+- Created and managed using DDL
+
+Other DDL Commands
+------------------
+- ALTER TABLE -> modify an existing table
+- DROP TABLE  -> delete a table
+
+2) DML (Data Manipulation Language)
+----------------------------------
+- Used to manipulate data inside tables
+
+Commands:
+- INSERT -> add data
+- SELECT -> read data
+- UPDATE -> modify data
+- DELETE -> remove data
+
+Examples:
+SELECT * FROM Users;
+
+INSERT INTO Users (name, age) VALUES ('Luca', 25);
+
+UPDATE Users SET age = 26 WHERE id = 1;
+
+DELETE FROM Users WHERE id = 1;
+
+Data Integrity
+--------------
+- Ensures data is correct and consistent
+
+Types:
+- Entity Integrity -> primary key must be unique
+- Referential Integrity -> foreign keys must be valid
+
+Advantages of Relational Databases
+---------------------------------
+- Clear structure
+- Reduced data duplication
+- Easy querying with SQL
+- Data consistency and integrity
+- Multi-user support
+
+Advanced Concepts
+-----------------
+
+Normalization:
+- Process to reduce redundancy
+- Data is split into multiple related tables
+
+Transactions (ACID):
+- Atomicity   -> all or nothing
+- Consistency -> valid data at all times
+- Isolation   -> operations do not interfere
+- Durability  -> data is permanently saved
+
+Indexes:
+- Improve query performance
+- Similar to an index in a book
+
+Summary
+-------
+- Uses tables
+- Uses keys to relate data
+- Uses SQL to interact with data
+- Ensures consistency and reliability

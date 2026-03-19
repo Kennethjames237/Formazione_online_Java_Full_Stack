@@ -50,7 +50,6 @@ public class Main2 {
 
         System.out.println("==========================================FileNotFoundException================================================");
         try{
-
             File file = new File("/Users/nnaminkoussekennethjames/Desktop/Java_formation/exercises/E5/src/example.txt");
         Scanner reader = new Scanner(file);
 

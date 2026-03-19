@@ -1,0 +1,121 @@
+SQL CONSTRAINTS (ATTRIBUTES RESTRICTIONS)
+========================================
+
+1. NOT NULL
+-----------
+- Column cannot have NULL values
+
+Example:
+nome VARCHAR(100) NOT NULL
+
+
+2. UNIQUE
+---------
+- All values in the column must be different
+
+Example:
+email VARCHAR(100) UNIQUE
+
+
+3. PRIMARY KEY
+--------------
+- Uniquely identifies each row
+- Cannot be NULL
+- Only one per table (can be composite)
+
+Example:
+id BIGINT AUTO_INCREMENT PRIMARY KEY
+
+OR
+
+PRIMARY KEY (id)
+
+
+4. FOREIGN KEY
+--------------
+- Links a column to another table
+
+Example:
+FOREIGN KEY (categoria_id)
+REFERENCES categorie(categoria_id)
+
+
+5. DEFAULT
+----------
+- Sets a default value if none is provided
+
+Example:
+eta INT DEFAULT 18
+
+data_creazione TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+
+6. CHECK
+--------
+- Restricts values based on a condition
+
+Example:
+eta INT CHECK (eta >= 18)
+
+prezzo DECIMAL(10,2) CHECK (prezzo > 0)
+
+
+7. AUTO_INCREMENT
+-----------------
+- Automatically generates increasing numbers (MySQL/MariaDB)
+
+Example:
+id BIGINT AUTO_INCREMENT
+
+
+8. ON DELETE / ON UPDATE (Foreign Key rules)
+--------------------------------------------
+- Define behavior when parent row is changed or deleted
+
+ON DELETE options:
+- RESTRICT -> block delete
+- CASCADE  -> delete child rows
+- SET NULL -> set foreign key to NULL
+- NO ACTION -> similar to RESTRICT
+
+Example:
+FOREIGN KEY (categoria_id)
+REFERENCES categorie(categoria_id)
+ON DELETE CASCADE
+ON UPDATE CASCADE
+
+
+9. COMPOSITE KEY
+----------------
+- Primary key made of multiple columns
+
+Example:
+PRIMARY KEY (studente_id, corso_id)
+
+
+10. FULL EXAMPLE
+----------------
+CREATE TABLE prodotti (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    prezzo DECIMAL(10,2) CHECK (prezzo > 0),
+    email VARCHAR(100) UNIQUE,
+    categoria_id BIGINT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (categoria_id)
+    REFERENCES categorie(categoria_id)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE
+);
+
+
+11. QUICK SUMMARY
+-----------------
+NOT NULL        -> no empty values
+UNIQUE          -> no duplicates
+PRIMARY KEY     -> unique identifier
+FOREIGN KEY     -> link tables
+DEFAULT         -> automatic value
+CHECK           -> condition rule
+AUTO_INCREMENT  -> auto ID
+ON DELETE/UPDATE-> behavior rules

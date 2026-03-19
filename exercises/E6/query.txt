@@ -1,0 +1,41 @@
+CREATE TABLE studenti (
+    student_id BIGINT AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE,
+    
+    PRIMARY KEY (student_id)
+);
+
+CREATE TABLE prodotti (
+    id BIGINT AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL ,
+    prezzo DOUBLE(10,2) NOT NULL,
+    descrizione VARCHAR(150),
+    
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE ordini (
+    id BIGINT AUTO_INCREMENT,
+    cliente_nome VARCHAR(100) NOT NULL,
+    totale DOUBLE(10,2) NOT NULL,
+    data_ordine DATETIME DEFAULT CURRENT_TIMESTAMP,
+    
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE libri (
+	ISBN INT(50) AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL UNIQUE,
+    
+    PRIMARY KEY (ISBN)
+);
+CREATE TABLE iscrizioni ( 
+	iscrizione_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+	student_id BIGINT NOT NULL,
+	corso_id BIGINT(50) NOT NULL,
+	data_iscrizione TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+	FOREIGN KEY (student_id) REFERENCES studenti(student_id), FOREIGN KEY (corso_id) REFERENCES corsi(corso_id) );
+
+

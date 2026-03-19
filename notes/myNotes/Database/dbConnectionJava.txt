@@ -1,0 +1,84 @@
+JAVA --> Database Connection + Query
+===================================
+
+Connection to Database
+----------------------
+To connect to a database in Java you need:
+
+- URL       -> database address
+- USER      -> username
+- PASSWORD  -> password
+
+Example (JDBC):
+---------------
+String url = "jdbc:mysql://localhost:3306/db_name";
+String user = "root";
+String password = "password";
+
+Connection conn = DriverManager.getConnection(url, user, password);
+
+Try-With-Resources
+------------------
+- Used to automatically close the connection
+
+Example:
+--------
+try (Connection conn = DriverManager.getConnection(url, user, password)) {
+
+    // code here
+
+} catch (SQLException e) {
+    e.printStackTrace();
+}
+
+SQL Query (JOIN) - SIMPLE WAY
+-----------------------------
+
+Original:
+---------
+SELECT a.titolo, au.nome
+FROM articoli a
+JOIN autori au ON a.autore_fk = au.autore_id;
+
+Simple Explanation:
+-------------------
+- "a" = articoli (alias, short name)
+- "au" = autori (alias)
+
+Meaning:
+- Take "titolo" from articoli
+- Take "nome" from autori
+- Join the tables where:
+  articoli.autore_fk = autori.autore_id
+
+Even Simpler (no alias):
+-----------------------
+SELECT articoli.titolo, autori.nome
+FROM articoli
+JOIN autori ON articoli.autore_fk = autori.autore_id;
+
+Mental Model:
+-------------
+- articoli.autore_fk -> points to autori.autore_id
+- So we "connect" rows from both tables
+
+Java Example with Query
+----------------------
+try (Connection conn = DriverManager.getConnection(url, user, password);
+     PreparedStatement stmt = conn.prepareStatement(
+         "SELECT a.titolo, au.nome " +
+         "FROM articoli a " +
+         "JOIN autori au ON a.autore_fk = au.autore_id"
+     );
+     ResultSet rs = stmt.executeQuery()) {
+
+    while (rs.next()) {
+        String titolo = rs.getString("titolo");
+        String nome = rs.getString("nome");
+
+        System.out.println(titolo + " - " + nome);
+    }
+
+} catch (SQLException e) {
+    e.printStackTrace();
+}
