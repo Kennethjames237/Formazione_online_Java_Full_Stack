@@ -1,0 +1,117 @@
+SQL JOINS NOTES
+===============
+
+1. WHAT IS A JOIN
+-----------------
+A JOIN is used to combine data from two tables that are related
+through a key (usually a foreign key).
+
+Example:
+- articles table
+- authors table
+- connected by: autore_fk
+
+
+2. INNER JOIN
+--------------
+Returns only rows that have matching values in BOTH tables.
+(It is like an intersection)
+
+Example:
+
+SELECT a.title, u.name
+FROM articles AS a
+INNER JOIN authors AS u
+ON a.autore_fk = u.autori_id;
+
+Result:
+- Only articles that have a valid author
+
+
+3. LEFT JOIN
+-------------
+Returns ALL rows from the LEFT table
++ matching rows from the RIGHT table
++ NULL if there is no match
+
+Example:
+
+SELECT u.name, a.title
+FROM authors AS u
+LEFT JOIN articles AS a
+ON u.autori_id = a.autore_fk;
+
+Result:
+- All authors are shown
+- If an author has no articles -> title = NULL
+
+
+4. FIND ROWS WITH NO MATCH
+--------------------------
+Use LEFT JOIN + WHERE ... IS NULL
+
+Example:
+
+SELECT u.name
+FROM authors AS u
+LEFT JOIN articles AS a
+ON u.autori_id = a.autore_fk
+WHERE a.article_id IS NULL;
+
+Result:
+- Authors with NO articles
+
+
+5. AGGREGATE FUNCTIONS
+----------------------
+
+MAX() -> returns the maximum value
+
+Example:
+
+SELECT MAX(publication_date) AS latest_date
+FROM articles;
+
+Result:
+- The most recent publication date
+
+
+6. COUNT + GROUP BY
+-------------------
+COUNT() counts rows
+GROUP BY groups rows by a column
+
+Example:
+
+SELECT autore_fk, COUNT(*) AS article_count
+FROM articles
+GROUP BY autore_fk;
+
+Result:
+- Number of articles per author
+
+
+7. HAVING
+----------
+HAVING is used to filter grouped results
+
+Example:
+
+SELECT autore_fk, COUNT(*) AS article_count
+FROM articles
+GROUP BY autore_fk
+HAVING COUNT(article_id) > 1;
+
+Result:
+- Authors with more than 1 article
+
+
+SUMMARY
+--------
+INNER JOIN  -> only matches
+LEFT JOIN   -> all left + matches
+IS NULL     -> find missing relations
+MAX()       -> maximum value
+COUNT()     -> count rows
+GROUP BY    -> group rows
+HAVING      -> filter groups
