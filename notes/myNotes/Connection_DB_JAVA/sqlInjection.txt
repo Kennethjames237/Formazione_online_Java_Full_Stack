@@ -1,0 +1,112 @@
+SQL Injection
+=============
+
+What is SQL Injection
+---------------------
+- SQL Injection is a security vulnerability
+- It happens when user input is directly inserted into SQL queries
+- The query is built as a string without validation
+
+- An attacker can modify the query to:
+  * access unauthorized data
+  * bypass authentication
+  * delete or modify database data
+
+----------------------------------------
+
+How it happens
+--------------
+- When user input is concatenated into a SQL string
+
+Example (VULNERABLE):
+---------------------
+String username = request.getParameter("username");
+String password = request.getParameter("password");
+
+String query = "SELECT * FROM users WHERE username = '" 
+             + username + "' AND password = '" 
+             + password + "'";
+
+Statement stmt = conn.createStatement();
+ResultSet rs = stmt.executeQuery(query);
+
+----------------------------------------
+
+Attack Example
+--------------
+User input:
+username: admin
+password: ' OR '1'='1
+
+Resulting query:
+SELECT * FROM users 
+WHERE username = 'admin' 
+AND password = '' OR '1'='1';
+
+- This condition is always TRUE
+- The attacker bypasses login without a real password
+
+----------------------------------------
+
+Why it is dangerous
+------------------
+- Unauthorized access to data
+- Data leaks (sensitive information)
+- Data corruption or deletion
+- Full database compromise
+
+----------------------------------------
+
+SOLUTION
+========
+
+1) Use PreparedStatement (BEST PRACTICE)
+----------------------------------------
+- Separates SQL code from user input
+- Automatically escapes dangerous characters
+
+Safe Example:
+-------------
+PreparedStatement ps = conn.prepareStatement(
+    "SELECT * FROM users WHERE username = ? AND password = ?"
+);
+
+ps.setString(1, username);
+ps.setString(2, password);
+
+ResultSet rs = ps.executeQuery();
+
+- Input is treated as data, not code
+
+----------------------------------------
+
+2) Input Validation
+-------------------
+- Validate and sanitize user input
+- Example:
+  * check length
+  * allow only expected characters
+
+----------------------------------------
+
+3) Use ORM frameworks
+---------------------
+- Tools like Hibernate reduce risk
+- They handle query generation safely
+
+----------------------------------------
+
+4) Least Privilege Principle
+---------------------------
+- Database users should have limited permissions
+- Avoid using admin/root accounts
+
+----------------------------------------
+
+SUMMARY
+-------
+- SQL Injection happens when queries are built using raw strings
+- Attackers can manipulate queries via input
+- Main solution: use PreparedStatement
+- Never trust user input
+- Always validate and limit permissions

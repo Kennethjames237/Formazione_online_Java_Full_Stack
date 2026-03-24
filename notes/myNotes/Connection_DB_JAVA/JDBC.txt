@@ -1,0 +1,260 @@
+JDBC
+=====
+
+What is JDBC
+------------
+- JDBC (Java Database Connectivity) is a standard Java API
+- It allows Java to communicate with relational databases
+- It is a collection of interfaces and classes used to:
+  * connect to a database
+  * execute SQL queries
+  * read results
+
+Purpose
+-------
+- Manages data persistence
+- Allows changing the database with minimal code changes
+- Provides abstraction between Java application and DB
+
+Main Components
+---------------
+
+1) JDBC Driver
+- A library specific to each database
+- Works as a translator (adapter/bridge)
+- Converts Java calls into database-specific protocol
+
+Examples:
+- MySQL Driver
+- PostgreSQL Driver
+
+----------------------------------------
+
+2) Connection
+- Represents a connection to the database
+
+Example:
+Connection conn = null;
+
+try {
+    conn = DriverManager.getConnection(
+        "jdbc:mysql://localhost:3306/mydb",
+        "user",
+        "password"
+    );
+} catch (SQLException e) {
+    e.printStackTrace();
+} finally {
+    try {
+        if (conn != null) conn.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+
+----------------------------------------
+
+3) PreparedStatement (USE THIS INSTEAD OF STATEMENT)
+- Safer and more efficient
+- Uses placeholders (?) to prevent SQL Injection
+
+Example:
+Connection conn = null;
+PreparedStatement ps = null;
+ResultSet rs = null;
+
+try {
+    conn = DriverManager.getConnection(
+        "jdbc:mysql://localhost:3306/mydb",
+        "user",
+        "password"
+    );
+
+    ps = conn.prepareStatement(
+        "SELECT * FROM users WHERE name = ?"
+    );
+
+    ps.setString(1, "John");
+
+    rs = ps.executeQuery();
+
+    while (rs.next()) {
+        System.out.println(rs.getString("name"));
+    }
+
+} catch (SQLException e) {
+    e.printStackTrace();
+} finally {
+    try {
+        if (rs != null) rs.close();
+        if (ps != null) ps.close();
+        if (conn != null) conn.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+
+----------------------------------------
+
+4) Multiple Placeholders Example
+-------------------------------
+Connection conn = null;
+PreparedStatement ps = null;
+ResultSet rs = null;
+
+try {
+    conn = DriverManager.getConnection(
+        "jdbc:mysql://localhost:3306/mydb",
+        "user",
+        "password"
+    );
+
+    ps = conn.prepareStatement(
+        "SELECT * FROM users WHERE username = ? AND password = ?"
+    );
+
+    ps.setString(1, "admin");
+    ps.setString(2, "1234");
+
+    rs = ps.executeQuery();
+
+    while (rs.next()) {
+        System.out.println("Login success: " + rs.getString("username"));
+    }
+
+} catch (SQLException e) {
+    e.printStackTrace();
+} finally {
+    try {
+        if (rs != null) rs.close();
+        if (ps != null) ps.close();
+        if (conn != null) conn.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+
+----------------------------------------
+
+5) INSERT Example (IMPORTANT)
+----------------------------
+Connection conn = null;
+PreparedStatement ps = null;
+
+try {
+    conn = DriverManager.getConnection(
+        "jdbc:mysql://localhost:3306/mydb",
+        "user",
+        "password"
+    );
+
+    ps = conn.prepareStatement(
+        "INSERT INTO users (name, email) VALUES (?, ?)"
+    );
+
+    ps.setString(1, "John");
+    ps.setString(2, "john@email.com");
+
+    ps.executeUpdate();
+
+} catch (SQLException e) {
+    e.printStackTrace();
+} finally {
+    try {
+        if (ps != null) ps.close();
+        if (conn != null) conn.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+
+----------------------------------------
+
+6) ResultSet
+------------
+- Contains query results
+- Allows reading row by row
+
+Example:
+try {
+    while (rs.next()) {
+        String name = rs.getString("name");
+        System.out.println(name);
+    }
+} catch (SQLException e) {
+    e.printStackTrace();
+}
+
+----------------------------------------
+
+DriverManager
+-------------
+- Manages JDBC drivers
+- Establishes the correct connection
+
+----------------------------------------
+
+Maven (dependency)
+------------------
+- The JDBC driver must be added in pom.xml
+- It allows Java to communicate with the specific database
+
+Example (MySQL):
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-j</artifactId>
+    <version>8.x.x</version>
+</dependency>
+
+Example (PostgreSQL):
+<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>42.x.x</version>
+</dependency>
+
+----------------------------------------
+
+BEST PRACTICE (VERY IMPORTANT)
+------------------------------
+- ALWAYS use PreparedStatement
+- ALWAYS use placeholders (?)
+- NEVER concatenate user input into SQL
+- ALWAYS use try-catch
+- ALWAYS close resources
+
+----------------------------------------
+
+TRY-WITH-RESOURCES (BEST MODERN WAY)
+------------------------------------
+try (
+    Connection conn = DriverManager.getConnection(
+        "jdbc:mysql://localhost:3306/mydb",
+        "user",
+        "password"
+    );
+    PreparedStatement ps = conn.prepareStatement(
+        "SELECT * FROM users WHERE id = ?"
+    );
+) {
+    ps.setInt(1, 1);
+
+    try (ResultSet rs = ps.executeQuery()) {
+        while (rs.next()) {
+            System.out.println(rs.getString("name"));
+        }
+    }
+
+} catch (SQLException e) {
+    e.printStackTrace();
+}
+
+----------------------------------------
+
+SUMMARY
+-------
+- Use PreparedStatement instead of Statement
+- Use ? placeholders for ALL user input
+- This prevents SQL Injection
+- Always handle exceptions with try-catch
+- Always close resources or use try-with-resources

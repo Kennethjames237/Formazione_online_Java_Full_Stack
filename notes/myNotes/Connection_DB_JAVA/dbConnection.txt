@@ -1,0 +1,65 @@
+BEST PRACTICES (db.properties with code)
+----------------------------------------
+
+1) Store credentials in db.properties (never hardcode)
+-------------------------------------------------------
+# db.properties
+url=jdbc:mysql://localhost:3306/mydb
+username=root
+password=1234
+driver=com.mysql.cj.jdbc.Driver
+
+----------------------------------------
+
+2) Where to store db.properties
+-------------------------------
+- **Development**: `src/main/resources/`  
+  *This ensures the file is on the classpath and can be loaded easily.*
+- **Production**: external folder outside the codebase, e.g., `/config/`  
+  *Prevents sensitive data from being packaged in the JAR/WAR.*
+- Always add `db.properties` to `.gitignore` if it contains real passwords.
+
+----------------------------------------
+
+3) Load properties safely using try-with-resources
+---------------------------------------------------
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
+
+public class DBConnection {
+    public static Connection getConnection() {
+        Properties props = new Properties();
+
+        // Adjust path depending on storage location
+        try (FileInputStream fis = new FileInputStream("src/main/resources/db.properties")) {
+            // Load properties from file
+            props.load(fis);
+
+            // Get values
+            String url = props.getProperty("url");
+            String user = props.getProperty("username");
+            String pass = props.getProperty("password");
+
+            // Establish connection
+            return DriverManager.getConnection(url, user, pass);
+
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+}
+
+----------------------------------------
+
+4) Advantages / Safety
+----------------------
+- Credentials are **not hardcoded**
+- File can be ignored in Git (.gitignore)
+- Easy to change DB settings without touching code
+- try-with-resources ensures **automatic file closing**
+- Can easily switch between dev and prod environments by changing file location

@@ -1,0 +1,122 @@
+JDBC EXECUTION METHODS
+=====================
+
+1) executeQuery()
+-----------------
+- Used for: SELECT
+- Returns: ResultSet
+- Used when you expect DATA back
+
+Example:
+--------
+PreparedStatement ps = conn.prepareStatement(
+    "SELECT * FROM autori WHERE autore_id = ?"
+);
+ps.setInt(1, 1);
+
+ResultSet rs = ps.executeQuery();
+
+while (rs.next()) {
+    System.out.println(
+        rs.getLong("autore_id") + " - " +
+        rs.getString("nome")
+    );
+}
+
+----------------------------------------
+
+2) executeUpdate()
+------------------
+- Used for:
+  * INSERT
+  * UPDATE
+  * DELETE
+  * CREATE / DROP TABLE
+- Returns: int (number of affected rows)
+
+Example (INSERT):
+-----------------
+PreparedStatement ps = conn.prepareStatement(
+    "INSERT INTO autori (nome, email) VALUES (?, ?)"
+);
+
+ps.setString(1, "John");
+ps.setString(2, "john@email.com");
+
+int rows = ps.executeUpdate();
+System.out.println("Rows inserted: " + rows);
+
+----------------------------------------
+
+Example (UPDATE):
+-----------------
+PreparedStatement ps = conn.prepareStatement(
+    "UPDATE autori SET nome = ? WHERE autore_id = ?"
+);
+
+ps.setString(1, "Mario");
+ps.setInt(2, 1);
+
+int rows = ps.executeUpdate();
+
+----------------------------------------
+
+Example (DELETE):
+-----------------
+PreparedStatement ps = conn.prepareStatement(
+    "DELETE FROM autori WHERE autore_id = ?"
+);
+
+ps.setInt(1, 1);
+
+int rows = ps.executeUpdate();
+
+----------------------------------------
+
+3) execute()
+------------
+- Used for: ANY SQL (generic method)
+- Returns: boolean
+  * true  → ResultSet available
+  * false → update count available
+
+Example:
+--------
+PreparedStatement ps = conn.prepareStatement(
+    "SELECT * FROM autori"
+);
+
+boolean hasResult = ps.execute();
+
+if (hasResult) {
+    ResultSet rs = ps.getResultSet();
+} else {
+    int count = ps.getUpdateCount();
+}
+
+----------------------------------------
+
+IMPORTANT RULES
+---------------
+- SELECT        → executeQuery()
+- INSERT/UPDATE → executeUpdate()
+- DELETE        → executeUpdate()
+- CREATE TABLE  → executeUpdate()
+
+----------------------------------------
+
+COMMON ERRORS
+-------------
+- Using executeUpdate() with SELECT ❌
+- Using executeQuery() with INSERT ❌
+- Forgetting ResultSet.next() ❌
+- Wrong column names ❌
+- Missing spaces in SQL ❌
+
+----------------------------------------
+
+SUMMARY
+-------
+- executeQuery()  → returns ResultSet (READ data)
+- executeUpdate() → returns int (WRITE data)
+- execute()       → generic (rarely used)
