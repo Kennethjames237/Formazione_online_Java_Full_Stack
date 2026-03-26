@@ -1,0 +1,173 @@
+🚀 Dependency Injection Types in Java (Spring)
+==============================================
+
+1. 🏗️ Constructor Injection
+---------------------------
+📌 Definition:
+- Dependencies are provided through the class constructor.
+
+💡 Example:
+class Engine {
+}
+
+class Car {
+    private Engine engine;
+
+    public Car(Engine engine) {
+        this.engine = engine;
+    }
+}
+
+🌱 Spring Example:
+@Component
+class Car {
+    private final Engine engine;
+
+    @Autowired
+    public Car(Engine engine) {
+        this.engine = engine;
+    }
+}
+
+🔑 Key Points:
+- ✅ Dependencies are REQUIRED
+- 🔒 Supports immutability (use final)
+- ⭐ Most recommended approach
+
+✅ Advantages:
+- 🎯 Clear and explicit dependencies
+- 🧪 Easy unit testing
+- 🚫 Prevents NullPointerException
+- 🧱 Encourages solid design
+
+❌ Disadvantages:
+- 📦 Constructor can get long with many dependencies
+
+-------------------------------------------------------------
+
+2. 🔧 Setter Injection
+----------------------
+📌 Definition:
+- Dependencies are provided through setter methods.
+
+💡 Example:
+class Car {
+    private Engine engine;
+
+    public void setEngine(Engine engine) {
+        this.engine = engine;
+    }
+}
+
+🌱 Spring Example:
+@Component
+class Car {
+
+    private Engine engine;
+
+    @Autowired
+    public void setEngine(Engine engine) {
+        this.engine = engine;
+    }
+}
+
+🔑 Key Points:
+- ⚠️ Dependencies are OPTIONAL
+- 🔄 Can change after object creation
+
+✅ Advantages:
+- 🧩 Flexible
+- 🔁 Can reconfigure dependencies
+
+❌ Disadvantages:
+- ⚠️ Object may be incomplete
+- ❗ Hard to guarantee proper initialization
+- 🧪 Less safe for testing
+
+-------------------------------------------------------------
+
+3. 🎯 Field Injection
+---------------------
+📌 Definition:
+- Dependencies are injected directly into fields.
+
+💡 Example:
+@Component
+class Car {
+
+    @Autowired
+    private Engine engine;
+}
+
+🔑 Key Points:
+- ⚡ No constructor or setter needed
+- 🪄 Uses reflection internally
+
+✅ Advantages:
+- ✨ Very simple and short
+- 🧾 Less boilerplate
+
+❌ Disadvantages:
+- 🚫 Hard to test
+- 🔓 Breaks encapsulation
+- ❌ Not recommended in modern Spring
+
+-------------------------------------------------------------
+
+4. ⚖️ Comparison Table
+----------------------
+
+Type                | Required | Immutability | Testability | Recommended
+--------------------|----------|--------------|-------------|-------------
+🏗️ Constructor      | ✅ YES   | 🔒 YES       | ⭐⭐⭐⭐⭐      | 🌟🌟🌟🌟🌟
+🔧 Setter           | ❌ NO    | ❌ NO        | ⭐⭐⭐        | 🌟🌟🌟
+🎯 Field            | ❌ NO    | ❌ NO        | ⭐          | 🌟
+
+-------------------------------------------------------------
+
+5. 🧠 When to Use What?
+-----------------------
+🏗️ Use Constructor Injection:
+  ➤ 🔑 Mandatory dependencies
+  ➤ 💼 Default in real-world apps
+
+🔧 Use Setter Injection:
+  ➤ 🧩 Optional dependencies
+
+🎯 Avoid Field Injection:
+  ➤ ⚠️ Only for very simple/demo code
+
+-------------------------------------------------------------
+
+6. 🌟 Best Practice
+-------------------
+- 🥇 Prefer Constructor Injection
+- 🔗 Use interfaces for loose coupling
+- 📉 Keep dependencies minimal
+
+💡 Example (Clean Design):
+interface Engine {
+}
+
+@Component
+class PetrolEngine implements Engine {
+}
+
+@Component
+class Car {
+    private final Engine engine;
+
+    @Autowired
+    public Car(Engine engine) {
+        this.engine = engine;
+    }
+}
+
+-------------------------------------------------------------
+
+🎉 Summary:
+- 🏗️ Constructor = BEST ✅
+- 🔧 Setter = FLEXIBLE ⚙️
+- 🎯 Field = AVOID ❌
+
+👉 Goal: Clean, testable, and maintainable code!

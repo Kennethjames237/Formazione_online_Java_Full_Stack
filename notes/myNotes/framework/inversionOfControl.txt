@@ -1,0 +1,249 @@
+Inversion of Control (IoC) and Dependency Injection (DI) in Java
+===============================================================
+
+1. Inversion of Control (IoC)
+-----------------------------
+Definition:
+- IoC is a design principle where the control of object creation and management
+  is transferred from the programmer to a container or framework.
+
+Traditional approach:
+- The programmer manually creates objects using "new".
+- The programmer is responsible for managing dependencies.
+
+IoC approach:
+- The framework creates and manages objects.
+- The framework injects dependencies where needed.
+
+Purpose:
+- Reduce coupling between classes
+- Improve testability
+- Make code more modular and maintainable
+
+Example (WITHOUT IoC):
+class Engine {
+}
+
+class Car {
+    private Engine engine = new Engine(); // tightly coupled
+}
+
+Example (WITH IoC concept):
+class Car {
+    private Engine engine;
+
+    public Car(Engine engine) {
+        this.engine = engine;
+    }
+}
+
+-------------------------------------------------------------
+
+2. Dependency Injection (DI)
+----------------------------
+Definition:
+- DI is a technique used to implement IoC.
+- Dependencies are "injected" into a class instead of being created inside it.
+
+Types of DI:
+1) Constructor Injection (most recommended)
+2) Setter Injection
+3) Field Injection (less recommended)
+
+Example (Constructor Injection):
+class Engine {
+}
+
+class Car {
+    private Engine engine;
+
+    public Car(Engine engine) {
+        this.engine = engine;
+    }
+}
+
+Why use DI:
+- Easier unit testing (can mock dependencies)
+- Loose coupling
+- Better separation of concerns
+
+-------------------------------------------------------------
+
+3. IoC Container
+----------------
+Definition:
+- A container that manages object lifecycle and dependencies.
+
+Responsibilities:
+- Create objects (beans)
+- Inject dependencies
+- Configure objects
+- Manage lifecycle (init, destroy)
+
+In Spring:
+- The IoC container is responsible for everything above.
+
+Types in Spring:
+- BeanFactory (basic)
+- ApplicationContext (advanced, most used)
+
+-------------------------------------------------------------
+
+4. Spring Framework and IoC
+---------------------------
+- Spring is a framework that implements IoC and DI.
+- It provides a container that manages your objects.
+
+Key idea:
+- "Don't call the framework, the framework calls you"
+
+This means:
+- You define components
+- Spring wires them together automatically
+
+-------------------------------------------------------------
+
+5. Configuration: Annotations vs XML
+-----------------------------------
+Spring can configure beans in two ways:
+
+A) XML Configuration (older approach)
+Example:
+<bean id="engine" class="com.example.Engine"/>
+<bean id="car" class="com.example.Car">
+    <constructor-arg ref="engine"/>
+</bean>
+
+B) Annotation-Based Configuration (modern approach)
+Example:
+@Component
+class Engine {
+}
+
+@Component
+class Car {
+    private final Engine engine;
+
+    @Autowired
+    public Car(Engine engine) {
+        this.engine = engine;
+    }
+}
+
+Important annotations:
+- @Component -> marks a class as a bean
+- @Autowired -> injects dependencies
+- @Service, @Repository, @Controller -> specialized components
+
+-------------------------------------------------------------
+
+6. What is a Bean?
+------------------
+Definition:
+- A bean is an object that is managed by the Spring IoC container.
+
+Key points:
+- Created by Spring, not by "new"
+- Lifecycle managed by Spring
+- Can be injected into other beans
+
+Example:
+@Component
+class Engine {
+}
+
+@Component
+class Car {
+    private Engine engine;
+
+    @Autowired
+    public Car(Engine engine) {
+        this.engine = engine;
+    }
+}
+
+Here:
+- Engine is a bean
+- Car is a bean
+- Spring automatically injects Engine into Car
+
+-------------------------------------------------------------
+
+7. Programmer vs Framework Collaboration
+----------------------------------------
+Traditional programming:
+- You control everything (object creation, flow, dependencies)
+
+With IoC + Spring:
+- You define:
+    * classes
+    * relationships (dependencies)
+- Spring handles:
+    * object creation
+    * dependency injection
+    * lifecycle
+
+This is called:
+- "Hollywood Principle" → "Don't call us, we'll call you"
+
+-------------------------------------------------------------
+
+8. Extra Important Concepts (Often Missing)
+-------------------------------------------
+
+A) Bean Scope:
+- singleton (default): one instance per container
+- prototype: new instance every time requested
+
+Example:
+@Scope("prototype")
+
+B) Lifecycle Hooks:
+- @PostConstruct → runs after bean creation
+- @PreDestroy → runs before bean destruction
+
+C) Configuration Class:
+@Configuration
+class AppConfig {
+
+    @Bean
+    public Engine engine() {
+        return new Engine();
+    }
+
+    @Bean
+    public Car car() {
+        return new Car(engine());
+    }
+}
+
+D) Loose Coupling Example:
+interface Engine {
+}
+
+class PetrolEngine implements Engine {
+}
+
+class ElectricEngine implements Engine {
+}
+
+class Car {
+    private Engine engine;
+
+    public Car(Engine engine) {
+        this.engine = engine;
+    }
+}
+
+→ You can switch implementation without changing Car!
+
+-------------------------------------------------------------
+
+9. Summary
+-----------
+- IoC = control is given to the framework
+- DI = how dependencies are provided
+- Spring = implements IoC using a container
+- Beans = objects managed by Spring
+- Configuration = XML or annotations (annotations preferred)
+- Goal = loose coupling, maintainability, testability
