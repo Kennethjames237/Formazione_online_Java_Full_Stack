@@ -1,0 +1,237 @@
+     1	🚀 SPRING & SPRING BOOT – CORE CONCEPTS (REUSABLE)
+     2	
+     3	========================
+     4	🧠 1. INTERFACES & DESIGN
+     5	=========================
+     6	
+     7	👉 Program to interfaces, not implementations
+     8	💡 Example: PaymentProcessor
+     9	
+    10	✔️ Why?
+    11	
+    12	* Swap implementations easily 🔄
+    13	* Loose coupling 🔗
+    14	* More testable 🧪
+    15	
+    16	========================
+    17	💉 2. DEPENDENCY INJECTION (DI)
+    18	===============================
+    19	
+    20	👉 Objects don’t create dependencies → they RECEIVE them
+    21	
+    22	✔️ Types:
+    23	
+    24	* Constructor injection (BEST) 🥇
+    25	* Field injection ⚠️ (avoid)
+    26	
+    27	💡 Benefit:
+    28	
+    29	* Decoupled code
+    30	* Easy to change behavior
+    31	* Better testing
+    32	
+    33	========================
+    34	📦 3. IOC CONTAINER (SPRING)
+    35	============================
+    36	
+    37	👉 Spring manages objects (beans)
+    38	
+    39	✔️ Responsibilities:
+    40	
+    41	* Create objects 🏗️
+    42	* Inject dependencies 💉
+    43	* Manage lifecycle 🔄
+    44	
+    45	💡 You use:
+    46	`ApplicationContext`
+    47	
+    48	========================
+    49	🌱 4. BEANS
+    50	===========
+    51	
+    52	👉 A bean = object managed by Spring
+    53	
+    54	✔️ Ways to create:
+    55	
+    56	* `@Bean` (manual config) ⚙️
+    57	* `@Component` (auto scan) 🤖
+    58	
+    59	💡 Default scope:
+    60	
+    61	* Singleton 🔁 (one instance)
+    62	
+    63	========================
+    64	🔍 5. COMPONENT SCANNING
+    65	========================
+    66	
+    67	👉 Spring auto-detects classes
+    68	
+    69	✔️ Annotations:
+    70	
+    71	* `@Component`
+    72	* `@Service`
+    73	* `@Repository`
+    74	* `@Controller`
+    75	
+    76	💡 Reduces configuration ✂️
+    77	
+    78	========================
+    79	🎯 6. AUTOWIRING
+    80	================
+    81	
+    82	👉 Spring automatically injects dependencies
+    83	
+    84	✔️ Tools:
+    85	
+    86	* `@Autowired`
+    87	* `@Qualifier` 🎯 (choose specific bean)
+    88	* `@Primary` ⭐ (default choice)
+    89	
+    90	💡 Solves multiple implementation problem
+    91	
+    92	========================
+    93	🔄 7. LOOSE COUPLING
+    94	====================
+    95	
+    96	👉 Classes depend on abstractions, not concrete classes
+    97	
+    98	✔️ Result:
+    99	
+   100	* Flexible code 🔄
+   101	* Replace parts without breaking system
+   102	
+   103	========================
+   104	⏳ 8. BEAN LIFECYCLE
+   105	===================
+   106	
+   107	👉 Control initialization & destruction
+   108	
+   109	✔️ Hooks:
+   110	
+   111	* `@PostConstruct` 🚀 (after creation)
+   112	* `@PreDestroy` 🛑 (before destroy)
+   113	
+   114	========================
+   115	🌍 9. SPRING BOOT PHILOSOPHY
+   116	============================
+   117	
+   118	👉 "Convention over Configuration" ✨
+   119	
+   120	✔️ Means:
+   121	
+   122	* Minimal setup
+   123	* Sensible defaults
+   124	
+   125	💡 You write LESS config, MORE logic
+   126	
+   127	========================
+   128	⚙️ 10. AUTO-CONFIGURATION
+   129	=========================
+   130	
+   131	👉 Spring Boot configures things automatically
+   132	
+   133	✔️ Based on:
+   134	
+   135	* Dependencies 📦
+   136	* Classpath 🔍
+   137	* Missing beans
+   138	
+   139	💡 Example:
+   140	
+   141	* Add JPA → DB auto-configured 🗄️
+   142	
+   143	========================
+   144	🌐 11. REST API
+   145	===============
+   146	
+   147	👉 Expose backend via HTTP
+   148	
+   149	✔️ Core:
+   150	
+   151	* `@RestController`
+   152	* `@GetMapping`
+   153	
+   154	💡 Used for frontend ↔ backend communication
+   155	
+   156	========================
+   157	📄 12. EXTERNAL CONFIGURATION
+   158	=============================
+   159	
+   160	👉 Separate config from code
+   161	
+   162	✔️ Files:
+   163	
+   164	* application.properties
+   165	* application.yml
+   166	
+   167	✔️ Use:
+   168	
+   169	* `@Value` 📥
+   170	
+   171	💡 Makes app flexible across environments
+   172	
+   173	========================
+   174	🌍 13. PROFILES
+   175	===============
+   176	
+   177	👉 Different configs for environments
+   178	
+   179	✔️ Examples:
+   180	
+   181	* dev 🧪
+   182	* prod 🚀
+   183	
+   184	💡 Activate:
+   185	`spring.profiles.active`
+   186	
+   187	========================
+   188	🧪 14. TESTING
+   189	==============
+   190	
+   191	👉 Verify Spring context & beans
+   192	
+   193	✔️ Tools:
+   194	
+   195	* `@SpringBootTest`
+   196	
+   197	💡 Ensures everything loads correctly
+   198	
+   199	========================
+   200	🗄️ 15. JPA (IMPORTANT)
+   201	=======================
+   202	
+   203	👉 Java ↔ Database mapping
+   204	
+   205	✔️ Concepts:
+   206	
+   207	* Entity = table 📊
+   208	* Repository = data access 📥
+   209	* No SQL needed (mostly)
+   210	
+   211	💡 ORM = Object Relational Mapping
+   212	
+   213	========================
+   214	🎯 FINAL MENTAL MODEL
+   215	=====================
+   216	
+   217	Spring = 🧠 manages objects
+   218	DI = 💉 inject dependencies
+   219	Beans = 🌱 managed objects
+   220	Boot = 🚀 auto configuration
+   221	
+   222	👉 Build apps by:
+   223	
+   224	* defining components
+   225	* wiring with DI
+   226	* letting Spring handle the rest
+   227	
+   228	========================
+   229	🔥 GOLDEN RULES
+   230	===============
+   231	
+   232	✔️ Always use interfaces
+   233	✔️ Prefer constructor injection
+   234	✔️ Keep classes small & focused
+   235	✔️ Let Spring manage objects
+   236	✔️ Avoid manual object creation (`new`)
+   237	

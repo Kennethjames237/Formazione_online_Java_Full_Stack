@@ -1,0 +1,143 @@
+SPRING BOOT in JAVA
+===================
+
+📌 What is Spring Boot?
+-----------------------
+Spring Boot is a framework built on top of Spring 🌱
+
+👉 It helps you create applications quickly and easily 🚀
+
+✔ It is used to manage:
+  - controllers (web layer)
+  - databases (data layer)
+  - application configuration
+  - backend logic
+
+--------------------------------------------------
+
+🔗 Relationship with Spring
+---------------------------
+
+👉 Spring Boot DOES NOT replace Spring ❌
+👉 It EXTENDS Spring ✅
+
+✔ It simplifies:
+  - configuration
+  - setup
+  - project structure
+
+--------------------------------------------------
+
+⚡ Why use Spring Boot?
+-----------------------
+
+👉 It reduces complexity compared to traditional Spring
+
+✔ No need for heavy XML configuration ❌
+✔ Minimal setup required ⚙️
+✔ Faster development 🚀
+
+--------------------------------------------------
+
+📦 Starters (IMPORTANT)
+-----------------------
+
+👉 Spring Boot provides "starter dependencies"
+
+Example:
+    spring-boot-starter-web
+
+✔ Starters include everything needed:
+  - web server (Tomcat) 🐱
+  - Spring MVC
+  - required libraries
+
+👉 Other examples:
+  - spring-boot-starter-data-jpa 🗄️
+  - spring-boot-starter-security 🔐
+
+--------------------------------------------------
+
+🌐 Embedded Server
+------------------
+
+👉 Spring Boot includes a built-in server
+
+✔ Default: Tomcat 🐱
+
+👉 No need to install server manually ❌
+
+✔ You just run:
+    main() → application starts 🚀
+
+--------------------------------------------------
+
+🤖 Auto-Configuration
+---------------------
+
+👉 Spring Boot automatically configures your app
+
+✔ Based on:
+  - dependencies
+  - classpath
+
+Example:
+👉 If you add a database dependency
+→ Spring Boot configures database automatically 🗄️
+
+✔ Reduces manual work ✂️
+
+--------------------------------------------------
+
+📁 Project Structure
+--------------------
+
+👉 Typical layers:
+
+  - Controller → handles HTTP requests 🌐
+  - Service    → business logic 🧠
+  - Repository → database access 🗄️
+
+✔ Clean architecture 🧩
+
+--------------------------------------------------
+
+▶️ Main Application
+-------------------
+
+👉 Entry point of Spring Boot app:
+
+    @SpringBootApplication
+    public class MyApp {
+        public static void main(String[] args) {
+            SpringApplication.run(MyApp.class, args);
+        }
+    }
+
+✔ Combines:
+  - @Configuration
+  - @EnableAutoConfiguration
+  - @ComponentScan
+
+--------------------------------------------------
+
+⚡ Advantages
+-------------
+
+✔ Fast development 🚀
+✔ Less configuration ⚙️
+✔ Embedded server 🌐
+✔ Production-ready features 📦
+
+--------------------------------------------------
+
+⚡ SUMMARY
+----------
+
+Spring Boot → extension of Spring 🌱
+Starters    → ready dependencies 📦
+AutoConfig  → automatic setup 🤖
+Tomcat      → embedded server 🐱
+Main class  → runs the app ▶️
+
+--------------------------------------------------

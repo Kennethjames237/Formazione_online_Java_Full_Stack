@@ -1,0 +1,148 @@
+SPRING in JAVA
+==============
+
+📌 What is Spring?
+------------------
+Spring is a Java framework that helps build applications
+in a simpler and more modular way 🧩
+
+✔ It manages:
+  - object creation
+  - dependencies
+  - configuration
+
+--------------------------------------------------
+
+🔄 IoC (Inversion of Control)
+-----------------------------
+
+👉 Meaning:
+YOU do NOT create objects → Spring does it for you 🤖
+
+Without Spring:
+    MyService service = new MyService();
+
+With Spring:
+    Spring creates and manages the object automatically
+
+✔ Advantages:
+  - cleaner code 🧼
+  - more flexible 🔁
+  - easier to test 🧪
+
+--------------------------------------------------
+
+💉 Dependency Injection (DI)
+----------------------------
+
+👉 Spring automatically injects dependencies
+
+Example:
+    @Autowired
+    MyService service;
+
+✔ Spring finds the bean and injects it automatically
+
+--------------------------------------------------
+
+🌱 BEANS
+---------
+
+👉 A Bean is an object managed by Spring
+
+✔ Created by the container
+✔ Managed automatically
+✔ Used for Dependency Injection
+
+--------------------------------------------------
+
+📦 Bean Scope
+-------------
+
+👉 Default: SINGLETON 🧍‍♂️
+    - only ONE instance in the whole application
+
+Other scopes:
+    - prototype → new object every time 🔁
+    - request   → one per HTTP request 🌐
+    - session   → one per user session 👤
+
+--------------------------------------------------
+
+🏷️ @Configuration
+-----------------
+
+👉 Used on a class
+
+Example:
+    @Configuration
+    public class AppConfig {
+    }
+
+✔ Indicates this class contains Spring configuration
+
+--------------------------------------------------
+
+🏷️ @Bean
+---------
+
+👉 Used on a method
+
+Example:
+    @Bean
+    public MyService myService() {
+        return new MyService();
+    }
+
+✔ The method returns an object → becomes a Bean
+
+--------------------------------------------------
+
+🤔 @Autowired
+-------------
+
+👉 Used to automatically inject dependencies
+
+Example:
+    @Autowired
+    MyService service;
+
+✔ Spring:
+  - searches for the bean 🔍
+  - injects it automatically ✅
+
+📌 Where it can be used:
+  - variables (fields)
+  - constructors (RECOMMENDED 👍)
+  - methods
+
+✔ Why use it:
+  - less code ✂️
+  - fewer errors ❌
+  - cleaner structure 🧼
+
+--------------------------------------------------
+
+🤖 Who does the work?
+---------------------
+
+👉 Spring Container (IoC Container)
+
+✔ Responsible for:
+  - creating beans 🌱
+  - managing lifecycle 🔄
+  - performing Dependency Injection 💉
+
+--------------------------------------------------
+
+⚡ SUMMARY
+----------
+
+IoC          → Spring controls objects 🔄
+DI           → Spring injects dependencies 💉
+Bean         → managed object 🌱
+@Configuration → config class 🏷️
+@Bean        → creates bean 🧩
+@Autowired   → links dependencies 🔗
+
+--------------------------------------------------
