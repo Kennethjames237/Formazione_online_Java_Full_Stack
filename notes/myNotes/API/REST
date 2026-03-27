@@ -1,0 +1,32 @@
+REST API in JAVA
+=================
+
+-> It uses the HTTP protocol
+-> Using to send data from front to back in form of json 
+-> In spring boot it is easy to inizialise and congigure this with the spring inizialiser
+->un Artifacte is the name of the application
+-> il group and ........
+-> il packaging (the most use is the Jar)
+-> Spring boot is compatible with the newes java 
+
+
+-> In Architecture we java is buit on level
+-> Controller -> endpoint from the client (Takes data from the client and send it to the back in the form of Json and send back response to the client also in Json). Its function is not to do any buisness logic but it send to the service layer that will handle it. Un controller Rest is use to make communicate in the form of JSON and CRUD.
+
+-> GET: take
+-> POST: add 
+-> DELETE: delete
+-> PUT/PATCH: update 
+
+-> every request to the server has to have a method 
+-> Il controller has stay away from buisness logic (from software enge)
+-> It also have to get the status of the HTTP protocol e.g 200 , 404
+
+
+-> What is POJO
+	->In an entity you must always have an empty constructore
+
+On the controller the annotation are 
+	-> @RestController
+	-> @RequestMapping("/api/tasks")
+
