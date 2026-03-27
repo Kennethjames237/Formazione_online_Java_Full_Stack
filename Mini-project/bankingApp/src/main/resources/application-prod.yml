@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: PROD-App
+
+  datasource:
+    url: jdbc:mysql://localhost:3307/payment_db
+    username: root
+    password: ""
+
+  h2:
+    console:
+      enable: true
