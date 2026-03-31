@@ -1,0 +1,63 @@
+ 1. Avvia l’app
+
+Prima di tutto, lancia l’applicazione Spring Boot:
+
+mvn spring-boot:run
+
+
+L’app gira su http://localhost:8080.
+_______
+ 2. Test con Postman
+ GET → Recuperare tutti i Task
+
+Metodo: GET
+
+URL: http://localhost:8080/api/tasks
+
+Body: Nessuno
+
+ Risposta attesa (inizialmente vuota):
+
+[]
+_____
+ POST → Creare un nuovo Task
+
+Metodo: POST
+
+URL: http://localhost:8080/api/tasks
+
+Header:
+
+Content-Type: application/json
+
+Body (raw, JSON):
+
+{
+  "title": "Studiare Spring Boot",
+  "completed": false
+}
+
+
+👉 Risposta attesa:
+
+{
+  "id": 1,
+  "title": "Studiare Spring Boot",
+  "completed": false
+}
+________
+ GET → Verificare la lista aggiornata
+
+Metodo: GET
+
+URL: http://localhost:8080/api/tasks
+
+ Risposta attesa:
+
+[
+  {
+    "id": 1,
+    "title": "Studiare Spring Boot",
+    "completed": false
+  }
+]

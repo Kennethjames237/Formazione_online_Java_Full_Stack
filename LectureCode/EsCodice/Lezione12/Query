@@ -1,0 +1,29 @@
+-- Creazione tabella autori
+CREATE TABLE autori (
+    autore_id INT AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    PRIMARY KEY (autore_id),
+    UNIQUE (email)
+);
+
+-- Creazione tabella articoli
+CREATE TABLE articoli (
+    articolo_id INT AUTO_INCREMENT,
+    titolo VARCHAR(255) NOT NULL,
+    contenuto TEXT NOT NULL,
+    data_pubblicazione DATETIME DEFAULT CURRENT_TIMESTAMP,
+    autore_fk INT,
+    PRIMARY KEY (articolo_id),
+    FOREIGN KEY (autore_fk) REFERENCES autori(autore_id)
+);
+
+-- Inseriamo autori
+INSERT INTO autori (nome, email) VALUES
+("Mario Rossi", "mario.rossi@example.com"),
+("Luigi Verdi", "luigi.verdi@example.com");
+
+-- Inseriamo articoli
+INSERT INTO articoli (titolo, contenuto, autore_fk) VALUES
+("Introduzione a Java", "Un articolo sui fondamenti di Java.", 1),
+("Database Relazionali", "Guida al modello relazionale.", 2);

@@ -1,0 +1,78 @@
+### GET al dipendenti
+GET localhost:8080/api/v1/dipendenti
+
+###
+POST localhost:8080/api/v1/dipendenti
+Content-Type: application/json
+
+{
+  "stipendio" : 2000.34,
+  "nome": "nna",
+  "cognome": "minkousse",
+  "email": "nna@gmail.com",
+  "ruolo": "Dirigente",
+  "reparto": {
+    "id" : 1
+  }
+}
+
+###
+POST localhost:8080/api/v1/dipendenti
+Content-Type: application/json
+
+{
+  "stipendio" : 3000.34,
+  "nome": "kenneth",
+  "cognome": "james",
+  "email": "ken@gmail.com",
+  "ruolo": "employee",
+  "reparto": {
+    "id" : 1
+  }
+}
+
+###
+POST localhost:8080/api/v1/dipendenti
+Content-Type: application/json
+
+{
+  "stipendio" : 5000.34,
+  "nome": "nelson",
+  "cognome": "rick",
+  "email": "rik@mail",
+  "ruolo": "Solder",
+  "reparto": {
+    "id" : 1
+  }
+}
+
+###
+DELETE localhost:8080/api/v1/dipendenti/1
+
+###
+PUT http://localhost:8080/api/v1/dipendenti/3
+Content-Type: application/json
+
+{
+  "stipendio" : 500.34,
+  "nome": "farel",
+  "cognome": "jack",
+  "email": "farel@gmail.com",
+  "ruolo": "studente",
+  "reparto": {
+    "id" : 3
+  }
+}
+
+###
+GET http://localhost:8080/api/v1/dipendenti/3
+
+###
+PATCH http://localhost:8080/api/v1/dipendenti/3?
+    nuovaSomma=-23000.23
+
+###
+
+PATCH http://localhost:8080/api/v1/dipendenti/trasferisci?
+    idDipendente=2&
+    idNuovoReparto=3

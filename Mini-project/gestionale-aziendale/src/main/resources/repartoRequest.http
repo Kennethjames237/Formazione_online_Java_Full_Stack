@@ -1,0 +1,41 @@
+### get all reparti
+GET localhost:8080/api/v1/reparti
+
+### add a new reparto
+POST localhost:8080/api/v1/reparti
+Content-Type: application/json
+
+{
+    "descrizione" : "Fifa Fans",
+    "nome": "Gamers_IT"
+}
+
+### add a new reparto
+POST localhost:8080/api/v1/reparti
+Content-Type: application/json
+
+{
+  "descrizione" : "XBOX",
+  "nome": "XBOX Gamers"
+}
+
+### add a new reparto
+POST localhost:8080/api/v1/reparti
+Content-Type: application/json
+
+{
+  "descrizione" : "Winners",
+  "nome": "Insomia night club"
+}
+
+###
+PUT http://localhost:8080/api/v1/reparti/1
+Content-Type: application/json
+
+{
+  "descrizione" : "Voli di turkish",
+  "nome": "Insomia "
+}
+
+###
+DELETE localhost:8080/api/v1/reparti/1

@@ -1,0 +1,153 @@
+# Data Persistence Layer in Java
+
+1. Concept of Persistence
+
+---
+
+* Persistence is the ability to store data permanently.
+* It allows data to survive even after the program is closed.
+* Example: saving data in a database, file, or external system.
+
+2. Types of Persistence
+
+---
+
+* File-based Persistence (File System)
+
+  * Data stored in files (.txt, .json, .xml)
+  * Simple but not very scalable
+
+* Database Persistence
+
+  * Relational databases (MySQL, PostgreSQL, etc.)
+  * NoSQL databases (MongoDB, etc.)
+  * More efficient and suitable for large applications
+
+3. JDBC (Java Database Connectivity)
+
+---
+
+* Java API used to connect to databases
+* Allows:
+
+  * Opening connections
+  * Executing SQL queries
+  * Managing results
+
+Main Components:
+
+* Driver: handles communication with the database
+* Connection: connection to the database
+* Statement / PreparedStatement: execute queries
+* ResultSet: contains query results
+
+4. ORM (Object Relational Mapping)
+
+--- 
+
+* Technique that maps Java objects to database tables
+* Avoids writing SQL manually
+* Improves code readability
+
+Common Frameworks:
+
+* Hibernate
+* JPA (Java Persistence API)
+
+5. JPA (Java Persistence API)
+
+---
+
+* Standard specification for persistence in Java
+* Uses annotations to map classes to database tables
+
+Example Annotations:
+
+* @Entity → class mapped to a table
+* @Id → primary key
+* @Column → table column
+
+Advantages:
+
+* Reduces boilerplate code
+* Portable across different databases
+
+6. Hibernate
+
+---
+
+* Implementation of JPA
+* Automatically manages:
+
+  * Saving objects
+  * Updating data
+  * Deleting data
+
+Features:
+
+* Caching
+* Lazy loading
+* Relationship management
+
+7. CRUD Operations
+
+---
+
+* Create → insert data
+* Read → retrieve data
+* Update → modify data
+* Delete → remove data
+
+8. Layered Architecture
+
+---
+
+* Presentation Layer → user interface
+* Business Logic Layer → application logic
+* Persistence Layer → data management
+
+Persistence Layer:
+
+* Communicates with the database
+* Uses DAO or Repository patterns
+
+9. DAO (Data Access Object)
+
+---
+
+* Design pattern that separates data access from business logic
+* Each DAO manages a specific entity/table
+
+Example:
+
+* UserDAO
+
+  * save()
+  * findById()
+  * delete()
+
+10. Advantages of Persistence
+
+---
+
+* Permanent data storage
+* Better organization
+* Scalability
+* Data security
+
+11. Disadvantages
+
+---
+
+* Increased complexity
+* Requires configuration
+* Possible performance issues
+
+12. Conclusion
+
+---
+
+* The persistence layer is essential in Java applications
+* It enables structured and long-term data management
+* Main tools: JDBC, JPA, Hibernate
+

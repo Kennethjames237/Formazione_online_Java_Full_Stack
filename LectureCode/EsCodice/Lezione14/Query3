@@ -1,0 +1,54 @@
+INNER JOIN (solo corrispondenze)
+
+Mostra articoli con i rispettivi autori → solo se esiste corrispondenza.
+SELECT
+    a.titolo,
+    u.nome
+FROM articoli AS a
+INNER JOIN autori AS u
+    ON a.autore_fk = u.autore_id;
+
+LEFT JOIN (tutti i record della tabella di sinistra)
+
+Mostra tutti gli autori, anche quelli senza articoli.
+SELECT
+    u.nome,
+    a.titolo
+FROM autori AS u
+LEFT JOIN articoli AS a
+    ON u.autore_id = a.autore_fk;
+
+LEFT JOIN per trovare “orfani”
+Autori senza articoli:
+SELECT
+    u.nome
+FROM autori AS u
+LEFT JOIN articoli AS a
+    ON u.autore_id = a.autore_fk
+WHERE a.articolo_id IS NULL;
+________
+-- Conteggio totale articoli
+SELECT COUNT(*) AS totale_articoli FROM articoli;
+
+-- Ultimo articolo pubblicato
+SELECT MAX(data_pubblicazione) AS articolo_piu_recente FROM articoli;
+__
+SELECT
+    u.nome,
+    COUNT(a.articolo_id) AS numero_articoli
+FROM autori AS u
+LEFT JOIN articoli AS a
+    ON u.autore_id = a.autore_fk
+GROUP BY u.autore_id, u.nome;
+
+-- Solo autori con più di 1 articolo
+SELECT
+    u.nome,
+    COUNT(a.articolo_id) AS numero_articoli
+FROM autori AS u
+INNER JOIN articoli AS a
+    ON u.autore_id = a.autore_fk
+GROUP BY u.autore_id, u.nome
+HAVING COUNT(a.articolo_id) > 1;
+
+

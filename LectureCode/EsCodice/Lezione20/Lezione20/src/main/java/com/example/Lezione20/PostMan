@@ -1,0 +1,57 @@
+1. Creare un Task
+
+Metodo: POST
+
+URL: http://localhost:8080/api/tasks
+
+Body (JSON):
+
+{
+  "title": "Studiare JPA"
+}
+
+
+➡️ Risposta (JSON esempio):
+
+{
+  "id": 1,
+  "title": "Studiare JPA",
+  "completed": false
+}
+
+🔹 2. Recuperare tutti i Task
+
+Metodo: GET
+
+URL: http://localhost:8080/api/tasks
+
+➡️ Risposta (JSON esempio):
+
+[
+  {
+    "id": 1,
+    "title": "Studiare JPA",
+    "completed": false
+  },
+  {
+    "id": 2,
+    "title": "Fare la spesa",
+    "completed": true
+  }
+]
+
+🔹 3. Recuperare solo i Task completati
+
+Metodo: GET
+
+URL: http://localhost:8080/api/tasks/completed
+
+➡️ Risposta (JSON esempio):
+
+[
+  {
+    "id": 2,
+    "title": "Fare la spesa",
+    "completed": true
+  }
+]

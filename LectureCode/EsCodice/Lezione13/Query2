@@ -1,0 +1,52 @@
+-- Inserisco un nuovo autore
+INSERT INTO autori (nome, email)
+VALUES ('Ada Lovelace', 'ada.lovelace@example.com');
+
+-- Inserisco un nuovo articolo legato ad Ada (autore_id = 3, ipotizzando sia il suo ID)
+INSERT INTO articoli (titolo, contenuto, autore_fk)
+VALUES ('Programmazione e poesia', 'Un saggio sulla bellezza del codice.', 3);
+
+-- Aggiorno l'email di Ada
+UPDATE autori
+SET email = 'ada.lovelace@pioneers.com'
+WHERE autore_id = 3;
+
+-- Elimino l'articolo con ID 5
+DELETE FROM articoli
+WHERE articolo_id = 5;
+
+-- Recupero titoli e date di pubblicazione di tutti gli articoli
+SELECT titolo, data_pubblicazione
+FROM articoli;
+
+-- Articoli scritti da Ada (autore_fk = 3)
+SELECT titolo, data_pubblicazione
+FROM articoli
+WHERE autore_fk = 3;
+
+-- Articoli pubblicati dopo il 1° gennaio 2023
+SELECT titolo
+FROM articoli
+WHERE data_pubblicazione > '2023-01-01';
+
+-- Autori con ID tra 1 e 3
+SELECT nome, email
+FROM autori
+WHERE autore_id BETWEEN 1 AND 3;
+
+-- Autori il cui nome inizia per "A"
+SELECT *
+FROM autori
+WHERE nome LIKE 'A%';
+
+-- Autori con ID specifici
+SELECT *
+FROM autori
+WHERE autore_id IN (1, 3, 5);
+
+-- Articoli ordinati dal più recente al più vecchio
+SELECT titolo, data_pubblicazione
+FROM articoli
+ORDER BY data_pubblicazione DESC;
+
+
