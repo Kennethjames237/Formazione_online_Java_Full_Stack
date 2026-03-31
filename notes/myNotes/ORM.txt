@@ -1,0 +1,23 @@
+               ORM(Object relazional mapping) in java
+                ======================================
+
+-> Hibernate -> JPA(Java persistance api): definiece laccesso al database 
+-> JPA fornice piu interfacice
+-> Hibernate fornice di transformare le query in sql 
+-> Per mappare un oggetto ad java sul database si fa con l'annotazione @Entity
+-> per un etita deve avere:
+			  -> un costruttore vuoto
+			  -> non deve essere final
+			  -> deve avere un primary key
+-> @id -> 
+-> @GeneratedValue (auto_increment)
+-> @Colume --> controlo il vincolo della colume
+-> 
+-> Il repository aiuta a ....
+->
+
+
+          Query methods
+          =============
+->
+
