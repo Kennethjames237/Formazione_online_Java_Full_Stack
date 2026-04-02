@@ -1,0 +1,13 @@
+Validazione al livello del controller
+=====================================
+
+-> Help to expose the API of the application 
+-> The help of a controller is the own that takes a request from a clent and turns it in to an object for other layers to manage
+-> The controller is not where there is Buisness logic 
+-> DTO(Data transfer object) -> helps transport data from one level to another
+-> So the controller send and recieve data using the DTO formate
+-> An API is a contract that gives other sistem the mode of data transfer and where the system expose a service
+
+DTO
+===
+
