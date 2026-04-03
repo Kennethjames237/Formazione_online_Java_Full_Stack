@@ -4,6 +4,29 @@ body{
 input{
   border-radius: 50;
 }
-.box{
-   background-color: #c4fff9;
+
+
+ li{
+   color: rgb(78, 78, 170);
 }
+
+div > h2{
+   color : red;
+}
+.card{
+   background-color: aqua;
+   padding: 10px;
+   border-radius: 10px;
+   display: flex ;
+   gap: 20px;
+   width: 400px;
+}
+ .card .card-txt > p{
+   color: red;
+
+   
+ }
+ .container{
+   display: flex;
+   gap: 10px;
+ }
